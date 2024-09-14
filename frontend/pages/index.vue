@@ -1,3 +1,6 @@
 <template>
-  <div>Index page</div>
+  <div>
+    <v-btn>test</v-btn>
+    <v-icon icon="mdi-home" />
+  </div>
 </template>
