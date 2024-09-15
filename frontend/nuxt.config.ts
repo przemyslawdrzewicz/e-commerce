@@ -7,5 +7,5 @@ export default defineNuxtConfig({
   vite: {
     plugins: [vuetify({ autoImport: true })]
   },
-  css: ['vuetify/styles']
+  css: ['vuetify/styles', '~/assets/scss/main.scss']
 })
