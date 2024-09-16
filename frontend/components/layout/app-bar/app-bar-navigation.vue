@@ -1,10 +1,6 @@
 <template>
   <div>
-    <v-btn
-      v-for="{ title, category } in buttons"
-      :key="category"
-      :to="{ path: '/products', query: { category } }"
-    >
+    <v-btn v-for="{ title, category } in buttons" :key="category">
       {{ title }}
     </v-btn>
   </div>
