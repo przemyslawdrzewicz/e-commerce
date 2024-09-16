@@ -8,7 +8,12 @@
           {{ selected.description }}
         </div>
         <hr class="separator mb-10" />
-        <v-btn class="configurator-btn" color="black" width="200">
+        <v-btn
+          class="configurator-btn"
+          color="black"
+          width="200"
+          :to="`/products/${selected.code}`"
+        >
           Configurator
         </v-btn>
       </v-col>

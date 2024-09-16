@@ -12,7 +12,8 @@ const products = [
     price: '144',
     description:
       'A chair is a type of seat, typically designed for one person and consisting of one or more legs.',
-    image: '/products/chair.png'
+    image: '/products/chair.png',
+    code: 'chair-iii'
   },
   {
     id: 2,
@@ -20,7 +21,8 @@ const products = [
     price: '225',
     description:
       'A chair is a type of seat, typically designed for one person and consisting of one or more legs.',
-    image: '/products/chair.png'
+    image: '/products/chair.png',
+    code: 'robin'
   },
   {
     id: 3,
@@ -28,7 +30,8 @@ const products = [
     price: '650',
     description:
       'A chair is a type of seat, typically designed for one person and consisting of one or more legs.',
-    image: '/products/chair.png'
+    image: '/products/chair.png',
+    code: 'sofia'
   },
   {
     id: 4,
@@ -36,7 +39,8 @@ const products = [
     price: '225',
     description:
       'A chair is a type of seat, typically designed for one person and consisting of one or more legs.',
-    image: '/products/chair.png'
+    image: '/products/chair.png',
+    code: 'chr'
   }
 ]
 </script>
