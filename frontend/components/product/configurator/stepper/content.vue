@@ -1,11 +1,9 @@
 <template>
-  <div>
-    <div v-if="selectedConfigurator.type === TYPES.COLOR">
-      <product-configurator-stepper-controls-colors
-        v-model="config[selectedConfiguratorIndex].value"
-        :colors="selectedConfigurator.colors"
-      />
-    </div>
+  <div v-if="selectedConfigurator.type === TYPES.COLOR">
+    <product-configurator-stepper-controls-colors
+      v-model="config[selectedConfiguratorIndex].value"
+      :colors="selectedConfigurator.colors"
+    />
   </div>
 </template>
 
@@ -32,4 +30,6 @@ const selectedConfiguratorIndex = computed(() => {
   const { configurator, selectedConfigurator } = props
   return configurator.findIndex(item => item.id === selectedConfigurator.id)
 })
+
+defineExpose({ config })
 </script>

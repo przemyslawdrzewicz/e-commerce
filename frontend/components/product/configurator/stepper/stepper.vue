@@ -4,15 +4,26 @@
       :steps="steps"
       :current-step="step"
       class="steps align-self-center"
-      @back="back"
+      @back="setStep($event)"
     />
     <product-configurator-stepper-content
+      ref="content"
       :configurator="configurator"
       :selected-configurator="selectedConfigurator"
       class="align-self-center"
     />
   </div>
-  <v-btn class="step-btn" color="black" width="200" @click="next">Next</v-btn>
+  <product-configurator-stepper-actions-next
+    v-if="step < steps.length"
+    :current-step="step"
+    :config="config"
+    @next="setStep(step + 1)"
+  />
+  <product-configurator-stepper-actions-cart
+    v-else
+    :current-step="step"
+    :config="config"
+  />
 </template>
 
 <script setup>
@@ -26,29 +37,28 @@ const props = defineProps({
 const { configurator } = props
 
 const step = ref(1)
+const setStep = value => (step.value = value)
+
 const steps = computed(() =>
   configurator.map(({ category }, index) => ({
     category,
-    value: index + 1
+    index: index + 1
   }))
 )
 
 const selectedConfigurator = computed(() => configurator[step.value - 1])
 
-const back = () => {
-  // TODO Validation
-  step.value -= 1
-}
-
-const next = () => {
-  // TODO Validation
-  step.value += 1
-}
+const content = ref(null)
+const config = computed(() => content.value?.config || [])
 </script>
 
 <style lang="scss" scoped>
 .steps {
   margin-left: -200px;
   width: 200px;
+}
+
+.step-btn {
+  font-size: 12px !important;
 }
 </style>

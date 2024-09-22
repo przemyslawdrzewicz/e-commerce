@@ -1,6 +1,12 @@
 <template>
-  <div class="details mt-10">
-    <product-configurator :product="product" />
+  <div class="details">
+    <product-configurator
+      class="align-self-center"
+      :title="product.title"
+      :price="product.price"
+      :image="product.image"
+      :configurator="product.configurator"
+    />
   </div>
 </template>
 
@@ -42,9 +48,10 @@ const product = {
 
 <style scoped lang="scss">
 .details {
-  // margin-left: 65px;
+  margin-left: 180px;
   // margin-right: 65px;
   display: flex;
   justify-content: center;
+  height: 80vh;
 }
 </style>
