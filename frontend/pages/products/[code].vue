@@ -1,5 +1,5 @@
 <template>
-  <div class="details">
+  <div class="product">
     <product-configurator
       class="align-self-center"
       :title="product.title"
@@ -23,10 +23,12 @@ const product = {
   configurator: [
     {
       id: 1,
-      category: 'Seat',
-      type: 'color',
-      colors: ['#6DB7BB', '#000000'],
-      code: 'seat'
+      category: 'Width',
+      type: 'number',
+      code: 'width',
+      params: {
+        placeholder: 'cm'
+      }
     },
     {
       id: 2,
@@ -47,9 +49,8 @@ const product = {
 </script>
 
 <style scoped lang="scss">
-.details {
+.product {
   margin-left: 180px;
-  // margin-right: 65px;
   display: flex;
   justify-content: center;
   height: 80vh;

@@ -23,10 +23,10 @@ const { config, currentStep } = toRefs(props)
 const addToCart = () => {
   const isValid = validateConfigValue(config.value, currentStep.value)
   if (!isValid) {
-    alert('show error')
+    alert('Select configuration')
     return
   }
 
-  alert('super')
+  alert('save')
 }
 </script>

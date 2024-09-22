@@ -5,11 +5,18 @@
       :colors="selectedConfigurator.colors"
     />
   </div>
+  <div v-else-if="selectedConfigurator.type === TYPES.NUMBER">
+    <product-configurator-stepper-controls-number
+      v-model="config[selectedConfiguratorIndex].value"
+      :params="config[selectedConfiguratorIndex].params"
+    />
+  </div>
 </template>
 
 <script setup>
 const TYPES = {
-  COLOR: 'color'
+  COLOR: 'color',
+  NUMBER: 'number'
 }
 
 const props = defineProps({

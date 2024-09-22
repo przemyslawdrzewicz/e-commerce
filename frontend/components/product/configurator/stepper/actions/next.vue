@@ -23,7 +23,7 @@ const { config, currentStep } = toRefs(props)
 const next = () => {
   const isValid = validateConfigValue(config.value, currentStep.value)
   if (!isValid) {
-    alert('show error')
+    alert('Select configuration')
     return
   }
 

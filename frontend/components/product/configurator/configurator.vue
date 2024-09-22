@@ -1,9 +1,13 @@
 <template>
   <div class="product-configurator">
-    <v-row class="content">
+    <v-row>
       <v-col cols="6">
-        <hr class="separator" />
+        <v-btn variant="text" width="80" class="mb-4" to="/products">
+          <v-icon class="mr-2">mdi-arrow-left</v-icon>
+          Back
+        </v-btn>
         <product-configurator-details :title="title" :price="price" />
+        <hr class="separator" />
         <product-configurator-stepper :configurator="configurator" />
       </v-col>
       <v-col cols="6" class="d-flex justify-center">
@@ -36,18 +40,13 @@ const props = defineProps({
 
 <style lang="scss" scoped>
 .product-configurator {
-  width: 1200px;
+  width: 800px;
 
-  .content {
-    margin-left: 200px;
-    margin-right: 200px;
-
-    .separator {
-      width: 60px;
-      height: 6px;
-      background: black;
-      border-radius: 2px;
-    }
+  .separator {
+    width: 60px;
+    height: 6px;
+    background: black;
+    border-radius: 2px;
   }
 }
 </style>

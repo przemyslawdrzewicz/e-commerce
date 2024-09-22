@@ -1,10 +1,10 @@
 <template>
   <div :class="{ disabled: isDisabled }">
     <v-avatar class="badge mr-6 my-2" size="20" :color="color">
-      <span>{{ index }}</span>
+      <span>{{ step.index }}</span>
     </v-avatar>
     <span class="category" @click="back">
-      {{ category }}
+      {{ step.category }}
     </span>
     <div v-if="!isLastStep" class="vertical-separator"></div>
   </div>
@@ -28,16 +28,15 @@ const props = defineProps({
 
 const emit = defineEmits(['back'])
 
-const { steps, currentStep } = toRefs(props)
-const { index, category } = toRefs(props.step)
+const { step, steps, currentStep } = toRefs(props)
 
-const isLastStep = computed(() => index.value === steps.value.length)
-const isDisabled = computed(() => index.value >= currentStep.value)
+const isLastStep = computed(() => step.value.index === steps.value.length)
+const isDisabled = computed(() => step.value.index >= currentStep.value)
 const color = computed(() =>
-  index.value === currentStep.value ? 'primary' : '#CECECE'
+  step.value.index === currentStep.value ? 'primary' : '#CECECE'
 )
 
-const back = () => !isDisabled.value && emit('back', index.value)
+const back = () => !isDisabled.value && emit('back', step.value.index)
 </script>
 
 <style lang="scss" scoped>
