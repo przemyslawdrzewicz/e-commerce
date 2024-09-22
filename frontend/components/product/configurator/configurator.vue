@@ -8,10 +8,17 @@
         </v-btn>
         <product-configurator-details :title="title" :price="price" />
         <hr class="separator" />
-        <product-configurator-stepper :configurator="configurator" />
+        <product-configurator-stepper
+          ref="stepper"
+          :configurator="configurator"
+        />
       </v-col>
       <v-col cols="6" class="d-flex justify-center">
-        <product-configurator-photo class="align-self-center" :image="image" />
+        <product-configurator-photo
+          class="align-self-center"
+          :image="image"
+          :config="config"
+        />
       </v-col>
     </v-row>
   </div>
@@ -36,6 +43,9 @@ const props = defineProps({
     default: () => []
   }
 })
+
+const stepper = ref(null)
+const config = computed(() => stepper.value?.config || [])
 </script>
 
 <style lang="scss" scoped>

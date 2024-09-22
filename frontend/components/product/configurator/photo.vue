@@ -2,7 +2,7 @@
   <div class="d-flex">
     <div class="photo">
       <div class="circle"></div>
-      <img :src="image" />
+      <img :src="selectedImage" />
     </div>
   </div>
 </template>
@@ -12,7 +12,25 @@ const props = defineProps({
   image: {
     type: String,
     default: ''
+  },
+  config: {
+    type: Array,
+    default: () => []
   }
+})
+
+const selectedImage = computed(() => {
+  const { image, config } = props
+  let newImage = image
+
+  config.forEach(({ code, value, colors }) => {
+    if (colors) {
+      const selectedColor = colors.find(item => item.color === value)
+      newImage = newImage.replace(`{${code}}`, selectedColor.code)
+    }
+  })
+
+  return newImage
 })
 </script>
 

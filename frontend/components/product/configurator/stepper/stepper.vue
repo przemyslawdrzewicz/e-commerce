@@ -50,6 +50,8 @@ const selectedConfigurator = computed(() => configurator[step.value - 1])
 
 const content = ref(null)
 const config = computed(() => content.value?.config || [])
+
+defineExpose({ config })
 </script>
 
 <style lang="scss" scoped>

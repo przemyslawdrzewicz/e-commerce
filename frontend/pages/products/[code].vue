@@ -17,8 +17,7 @@ const product = {
   price: '144',
   description:
     'A chair is a type of seat, typically designed for one person and consisting of one or more legs.',
-  image: '/products/chair.png',
-  additional_images: ['/products/chair.png'],
+  image: '/products/chair-iii/chair-{seat}-{legs}.png',
   code: 'chair-iii',
   configurator: [
     {
@@ -34,15 +33,20 @@ const product = {
       id: 2,
       category: 'Seat',
       type: 'color',
-      colors: ['#6DB7BB'],
-      code: 'seat2'
+      colors: [
+        { code: 'white', color: '#D9D9D3' },
+        { code: 'green', color: '#46BB9C' }
+      ],
+      value: '#D9D9D3',
+      code: 'seat'
     },
     {
       id: 3,
-      category: 'Seat',
+      category: 'Legs',
       type: 'color',
-      colors: ['#6DB7BB'],
-      code: 'seat3'
+      colors: [{ code: 'yellow', color: '#6DB7BB' }],
+      value: '#6DB7BB',
+      code: 'legs'
     }
   ]
 }

@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex">
     <div
-      v-for="(color, index) in colors"
+      v-for="({ color }, index) in colors"
       :key="index"
       class="mr-2"
       @click="changeColor(color)"
