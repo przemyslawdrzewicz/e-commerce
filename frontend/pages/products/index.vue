@@ -8,12 +8,12 @@
 const products = [
   {
     id: 1,
-    title: 'Chair III',
+    title: 'Bowl',
     price: '144',
     description:
       'A chair is a type of seat, typically designed for one person and consisting of one or more legs.',
-    image: '/products/chair.png',
-    code: 'chair-iii'
+    image: '/products/bowl.png',
+    code: 'bowl'
   },
   {
     id: 2,
@@ -21,7 +21,7 @@ const products = [
     price: '225',
     description:
       'A chair is a type of seat, typically designed for one person and consisting of one or more legs.',
-    image: '/products/chair.png',
+    image: '/products/robin.png',
     code: 'robin'
   },
   {

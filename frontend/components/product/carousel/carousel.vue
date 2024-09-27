@@ -13,7 +13,7 @@
         @update-selected="setSelected($event)"
       />
     </div>
-    <hr class="separator mt-12" />
+    <div class="separator mt-12"></div>
     <product-carousel-list :products="products" :selected="selected" />
   </div>
 </template>
