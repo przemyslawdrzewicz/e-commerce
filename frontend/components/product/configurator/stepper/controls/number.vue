@@ -4,7 +4,6 @@
     variant="outlined"
     :label="params.placeholder"
     width="200"
-    hide-details
     type="number"
     @keydown="validateNumbers"
   />

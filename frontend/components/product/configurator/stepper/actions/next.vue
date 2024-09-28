@@ -1,5 +1,13 @@
 <template>
-  <v-btn class="step-btn" color="black" width="200" @click="next">Next</v-btn>
+  <v-btn
+    :disabled="!isValid"
+    class="step-btn"
+    color="black"
+    width="200"
+    @click="next"
+  >
+    Next
+  </v-btn>
 </template>
 
 <script setup>
@@ -20,13 +28,9 @@ const emit = defineEmits(['next'])
 
 const { config, currentStep } = toRefs(props)
 
-const next = () => {
-  const isValid = validateConfigValue(config.value, currentStep.value)
-  if (!isValid) {
-    alert('Select configuration')
-    return
-  }
+const isValid = computed(() =>
+  validateConfigValue(config.value, currentStep.value)
+)
 
-  emit('next')
-}
+const next = () => emit('next')
 </script>

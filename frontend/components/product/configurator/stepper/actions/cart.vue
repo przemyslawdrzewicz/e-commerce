@@ -1,5 +1,11 @@
 <template>
-  <v-btn class="step-btn" color="black" width="200" @click="addToCart">
+  <v-btn
+    class="step-btn"
+    color="black"
+    width="200"
+    :disabled="!isValid"
+    @click="addToCart"
+  >
     Add to cart
   </v-btn>
 </template>
@@ -20,13 +26,12 @@ const props = defineProps({
 
 const { config, currentStep } = toRefs(props)
 
-const addToCart = () => {
-  const isValid = validateConfigValue(config.value, currentStep.value)
-  if (!isValid) {
-    alert('Select configuration')
-    return
-  }
+const isValid = computed(() =>
+  validateConfigValue(config.value, currentStep.value)
+)
 
+const addToCart = () => {
+  console.log(config, 'config')
   alert('save')
 }
 </script>
