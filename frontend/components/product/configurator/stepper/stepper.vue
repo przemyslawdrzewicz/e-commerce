@@ -8,7 +8,7 @@
     />
     <product-configurator-stepper-content
       ref="content"
-      :configurator="configurator"
+      :configurator="product.configurator"
       :selected-configurator="selectedConfigurator"
       class="align-self-center"
     />
@@ -23,30 +23,33 @@
     v-else
     :current-step="step"
     :config="config"
+    :product="product"
   />
 </template>
 
 <script setup>
 const props = defineProps({
-  configurator: {
-    type: Array,
-    default: () => []
+  product: {
+    type: Object,
+    default: () => {}
   }
 })
 
-const { configurator } = props
+const { product } = props
 
 const step = ref(1)
 const setStep = value => (step.value = value)
 
 const steps = computed(() =>
-  configurator.map(({ category }, index) => ({
+  product.configurator.map(({ category }, index) => ({
     category,
     index: index + 1
   }))
 )
 
-const selectedConfigurator = computed(() => configurator[step.value - 1])
+const selectedConfigurator = computed(
+  () => product.configurator[step.value - 1]
+)
 
 const content = ref(null)
 const config = computed(() => content.value?.config || [])

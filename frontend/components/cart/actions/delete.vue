@@ -5,6 +5,9 @@
 </template>
 
 <script setup>
+import { useCartStore } from '@/store/cart'
+const cartStore = useCartStore()
+
 const props = defineProps({
   item: {
     type: Object,
@@ -12,5 +15,8 @@ const props = defineProps({
   }
 })
 
-const deleteCartItem = () => console.log(props.item, 'item')
+const deleteCartItem = () => {
+  const { item } = props
+  cartStore.removeItem(item)
+}
 </script>

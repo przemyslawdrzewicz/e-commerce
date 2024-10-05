@@ -1,12 +1,6 @@
 <template>
   <div class="product">
-    <product-configurator
-      class="align-self-center"
-      :title="product.title"
-      :price="product.price"
-      :image="product.image"
-      :configurator="product.configurator"
-    />
+    <product-configurator class="align-self-center" :product="product" />
   </div>
 </template>
 

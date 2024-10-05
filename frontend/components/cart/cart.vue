@@ -4,7 +4,7 @@
       <cart-table :items="items" />
     </v-col>
     <v-col cols="4" class="d-flex justify-center">
-      <cart-summary />
+      <cart-summary :items="items" />
     </v-col>
   </v-row>
 </template>
@@ -12,8 +12,8 @@
 <script setup>
 const props = defineProps({
   items: {
-    type: Object,
-    default: () => {}
+    type: Array,
+    default: () => []
   }
 })
 </script>
