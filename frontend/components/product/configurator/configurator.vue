@@ -6,17 +6,17 @@
           <v-icon class="mr-2">mdi-arrow-left</v-icon>
           Back
         </v-btn>
-        <product-configurator-details :title="title" :price="price" />
-        <hr class="separator" />
-        <product-configurator-stepper
-          ref="stepper"
-          :configurator="configurator"
+        <product-configurator-details
+          :title="product.title"
+          :price="product.price"
         />
+        <hr class="separator" />
+        <product-configurator-stepper ref="stepper" :product="product" />
       </v-col>
       <v-col cols="6" class="d-flex justify-center">
         <product-configurator-photo
           class="align-self-center"
-          :image="image"
+          :image="product.image"
           :config="config"
         />
       </v-col>
@@ -26,21 +26,9 @@
 
 <script setup>
 const props = defineProps({
-  title: {
-    type: String,
-    default: ''
-  },
-  price: {
-    type: String,
-    default: ''
-  },
-  image: {
-    type: String,
-    default: ''
-  },
-  configurator: {
-    type: Array,
-    default: () => []
+  product: {
+    type: Object,
+    default: () => {}
   }
 })
 

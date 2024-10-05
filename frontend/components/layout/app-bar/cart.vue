@@ -1,5 +1,5 @@
 <template>
-  <v-btn icon to="/cart">
+  <v-btn variant="text" icon to="/cart">
     <icons-cart />
   </v-btn>
 </template>
