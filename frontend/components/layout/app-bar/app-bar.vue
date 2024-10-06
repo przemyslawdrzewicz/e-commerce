@@ -1,7 +1,9 @@
 <template>
   <v-app-bar height="80" color="transparent" flat class="app-bar pt-1">
     <div class="content">
-      <logo class="align-self-center" />
+      <nuxt-link to="/" class="text-decoration-none align-self-center">
+        <logo />
+      </nuxt-link>
       <div class="actions">
         <layout-app-bar-navigation class="align-self-center mr-10" />
         <layout-app-bar-cart class="align-self-center" />

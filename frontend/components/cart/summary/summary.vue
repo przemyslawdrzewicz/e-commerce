@@ -43,6 +43,7 @@ const props = defineProps({
 })
 
 const cartStore = useCartStore()
+const router = useRouter()
 
 const { delivery, contactDetails } = toRefs(cartStore)
 const { items } = toRefs(props)
@@ -66,6 +67,8 @@ const isSaveDisabled = computed(
 
 const buy = async () => {
   console.log('buy')
+
+  router.push('/order-success')
 }
 
 const productsPrice = computed(() =>
