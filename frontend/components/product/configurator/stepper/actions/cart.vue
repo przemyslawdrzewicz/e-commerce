@@ -4,6 +4,7 @@
     color="black"
     width="200"
     :disabled="!isValid"
+    to="/products/"
     @click="addToCart"
   >
     Add to cart
