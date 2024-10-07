@@ -11,7 +11,8 @@
     "test": "vitest",
     "lint": "eslint --ext .js,.vue,.ts .",
     "lint:fix": "eslint --fix --ext .js,.vue,.ts .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "share": "HOST=0.0.0.0 PORT=3333 nuxt dev"
   },
   "dependencies": {
     "@mdi/font": "^7.4.47",
