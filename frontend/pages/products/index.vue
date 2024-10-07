@@ -1,5 +1,5 @@
 <template>
-  <div class="products mt-10">
+  <div>
     <product-carousel :products="products" />
   </div>
 </template>
@@ -44,12 +44,3 @@ const products = [
   }
 ]
 </script>
-
-<style scoped lang="scss">
-.products {
-  // margin-left: 65px;
-  // margin-right: 65px;
-  display: flex;
-  justify-content: center;
-}
-</style>
