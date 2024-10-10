@@ -2,7 +2,7 @@
   <data-table :headers="headers" :items="items">
     <template #product="{ item }">
       <div class="d-flex">
-        <img class="image" :src="item.image" />
+        <img class="image" :src="item.fullImage" />
         <div class="align-self-center">
           <div>{{ item.title }}</div>
           <div>{{ configurationNames(item.configurator) }}</div>
@@ -38,7 +38,7 @@ const headers = [
 
 const configurationNames = configurator => {
   const getColorName = (category, value, colors) => {
-    const { code } = colors.find(({ color }) => color === value)
+    const { code } = colors.find(({ code }) => code === value)
     return `${category} ${code}`
   }
 

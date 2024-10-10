@@ -14,7 +14,7 @@
         { "code": "white", "color": "#D9D9D3" },
         { "code": "green", "color": "#46BB9C" }
       ],
-      "value": "#D9D9D3",
+      "value": "white",
       "code": "seat"
     },
     {
@@ -22,7 +22,7 @@
       "category": "Legs",
       "type": "color",
       "colors": [{ "code": "yellow", "color": "#6DB7BB" }],
-      "value": "#6DB7BB",
+      "value": "yellow",
       "code": "legs"
     },
     {

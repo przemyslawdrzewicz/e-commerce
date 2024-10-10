@@ -1,14 +1,14 @@
 <template>
   <div class="d-flex">
     <div
-      v-for="({ color }, index) in colors"
+      v-for="({ color, code }, index) in colors"
       :key="index"
       class="mr-2"
-      @click="changeColor(color)"
+      @click="changeColor(code)"
     >
       <div
         class="color-border d-flex justify-center"
-        :style="{ border: border(color) }"
+        :style="{ border: border(code, color) }"
       >
         <div
           class="color align-self-center"
@@ -28,8 +28,9 @@ const props = defineProps({
 })
 
 const model = defineModel()
-const changeColor = color => (model.value = color)
-const border = color => (model.value === color ? `2px solid ${color}` : 'none')
+const changeColor = code => (model.value = code)
+const border = (code, color) =>
+  model.value === code ? `2px solid ${color}` : 'none'
 </script>
 
 <style lang="scss" scoped>
