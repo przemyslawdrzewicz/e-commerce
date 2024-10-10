@@ -10,7 +10,7 @@
       <tr v-for="(item, index) in items" :key="index">
         <td v-for="header in headers" :key="header.value" :class="header.class">
           <slot :name="header.value" :item="item" />
-          <div v-if="header.type === 'price'">
+          <div v-if="header.type === TYPES.PRICE">
             {{ formatPrice(item[header.value]) }}
           </div>
           <div v-else>{{ item[header.value] }}</div>
@@ -25,6 +25,10 @@
 
 <script setup>
 import { formatPrice } from '@/utils/global'
+
+const TYPES = {
+  PRICE: 'price'
+}
 
 const props = defineProps({
   headers: {

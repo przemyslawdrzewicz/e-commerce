@@ -30,19 +30,6 @@ const TYPES = {
   NUMBER: 'number'
 }
 
-// const props = defineProps({
-//   configurator: {
-//     type: Array,
-//     default: () => []
-//   },
-//   product: {
-//     type: Object,
-//     default: () => {}
-//   }
-// })
-
 const configuratorStore = useConfiguratorStore()
 const { product } = toRefs(configuratorStore)
-
-// const { configurator } = toRefs(product.configurator)
 </script>

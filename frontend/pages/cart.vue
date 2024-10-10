@@ -2,15 +2,13 @@
   <client-only>
     <div class="shopping-cart">
       <div class="cart">
-        <v-btn
+        <actions-back
           v-if="display.smAndDown"
           class="mb-2"
-          variant="text"
-          to="/products/"
-        >
-          <v-icon class="mr-2">mdi-arrow-left</v-icon>
-          Continue shopping
-        </v-btn>
+          title="Continue shopping"
+          to="/products"
+        />
+
         <div class="title mb-8">Shopping cart</div>
         <cart :items="items" />
       </div>

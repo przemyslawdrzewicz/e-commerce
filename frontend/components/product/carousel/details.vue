@@ -3,7 +3,7 @@
     <v-row>
       <v-col cols="12" md="6" class="product">
         <div>
-          <div class="price">{{ selected.price }} PLN</div>
+          <div class="price">{{ formatPrice(selected.price) }}</div>
           <div class="title">{{ selected.title }}</div>
           <div class="description mt-6 mb-10">
             {{ selected.description }}
@@ -11,7 +11,7 @@
           <hr class="separator mb-10" />
           <v-btn
             v-show="display.mdAndUp"
-            class="configurator-btn"
+            class="configurator-button"
             color="black"
             :to="`/products/${selected.code}`"
             width="200"
@@ -42,6 +42,7 @@
 
 <script setup>
 import { useDisplay } from 'vuetify'
+import { formatPrice } from '@/utils/global'
 
 const props = defineProps({
   selected: {
@@ -165,7 +166,7 @@ const display = ref(useDisplay())
     }
   }
 
-  .configurator-btn {
+  .configurator-button {
     font-size: 12px !important;
   }
 }

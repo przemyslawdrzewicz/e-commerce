@@ -16,33 +16,6 @@ body {
   background: linear-gradient(#f3f2f3 0%, #ffffff 51%, #f3f2f3 100%);
 }
 
-// .container {
-//   padding-left: 20px;
-//   padding-right: 20px;
-//   min-height: 91vh;
-//   display: flex;
-
-//   @media (min-width: 1300px) {
-//     padding-left: 100px;
-//     padding-right: 100px;
-//   }
-
-//   @media (min-width: 1600px) {
-//     padding-left: 300px;
-//     padding-right: 300px;
-//   }
-
-//   .content {
-//     align-self: center;
-//     width: 100%;
-
-//     @media (max-width: $md) {
-//       align-self: flex-start;
-//       margin-top: 40px;
-//     }
-//   }
-// }
-
 .v-row {
   margin: 0 !important;
 }
@@ -79,6 +52,7 @@ body {
   color: unset;
 }
 
+// separators
 .separator {
   width: 60px;
   height: 6px;

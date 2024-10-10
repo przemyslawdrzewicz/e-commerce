@@ -2,30 +2,12 @@
   <div class="product-configurator mb-10">
     <v-row>
       <v-col cols="12" md="6">
-        <v-btn variant="text" width="80" class="mb-4" to="/products">
-          <v-icon class="mr-2">mdi-arrow-left</v-icon>
-          Back
-        </v-btn>
-        <product-configurator-details
-          :title="product.title"
-          :price="product.price"
-        />
+        <actions-back to="/products" />
+        <product-configurator-details />
         <hr class="separator" />
-        <product-configurator-photo
-          v-if="display.smAndDown"
-          :configurator="product.configurator"
-          :image="product.image"
-        />
-        <product-configurator-stepper
-          v-if="display.mdAndUp"
-          :product="product"
-        />
-        <product-configurator-stepper-mobile
-          v-else
-          class="mt-10"
-          :configurator="product.configurator"
-          :product="product"
-        />
+        <product-configurator-photo v-if="display.smAndDown" />
+        <product-configurator-stepper v-if="display.mdAndUp" />
+        <product-configurator-stepper-mobile v-else class="mt-10" />
       </v-col>
       <v-col
         v-if="display.mdAndUp"
@@ -33,11 +15,7 @@
         md="6"
         class="d-flex justify-center"
       >
-        <product-configurator-photo
-          class="align-self-center"
-          :configurator="product.configurator"
-          :image="product.image"
-        />
+        <product-configurator-photo class="align-self-center" />
       </v-col>
     </v-row>
   </div>
@@ -45,13 +23,6 @@
 
 <script setup>
 import { useDisplay } from 'vuetify'
-
-const props = defineProps({
-  product: {
-    type: Object,
-    default: () => {}
-  }
-})
 
 const display = ref(useDisplay())
 </script>

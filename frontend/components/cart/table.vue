@@ -14,10 +14,7 @@
     </template>
   </data-table>
   <div class="d-flex justify-space-between mt-7">
-    <v-btn variant="text" to="/products/">
-      <v-icon class="mr-2">mdi-arrow-left</v-icon>
-      Continue shopping
-    </v-btn>
+    <actions-back title="Continue shopping" to="/products" />
     <data-table-pagination />
   </div>
 </template>
@@ -34,7 +31,6 @@ const props = defineProps({
 
 const headers = [
   { title: 'Product', value: 'product' },
-  { title: 'Quantity', value: 'quantity' },
   { title: 'Total price', value: 'price', class: 'text-right', type: 'price' }
 ]
 </script>

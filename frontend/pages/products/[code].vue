@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="content">
-      <product-configurator v-if="!loading" :product="product" />
+      <product-configurator v-if="!loading" />
     </div>
   </div>
 </template>
@@ -18,16 +18,15 @@ onMounted(() => getProduct())
 const getProduct = async () => {
   try {
     product.value = await $fetch('/api/products/sofia/')
-    setDefaultCart()
+    saveDefaultCartToStore()
     loading.value = false
   } catch (e) {
     console.log(e, 'error')
   }
 }
 
-const setDefaultCart = () => {
+const saveDefaultCartToStore = () =>
   configuratorStore.changeProduct(product.value)
-}
 </script>
 
 <style lang="scss" scoped>

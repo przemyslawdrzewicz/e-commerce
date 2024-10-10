@@ -15,13 +15,10 @@ const { configurator, image } = toRefs(product.value)
 const selectedImage = computed(() => {
   if (!product.value) return ''
 
-  let newImage = image.value
+  const createNewUrl = (updatedImage, { colors, code, value }) =>
+    colors ? updatedImage.replace(`{${code}}`, value) : updatedImage
 
-  configurator.value.forEach(({ code, value, colors }) => {
-    if (colors) newImage = newImage.replace(`{${code}}`, value)
-  })
-
-  return newImage
+  return configurator.value.reduce(createNewUrl, image.value)
 })
 </script>
 
