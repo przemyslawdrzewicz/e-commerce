@@ -2,10 +2,12 @@
   <v-dialog
     :model-value="true"
     class="form-dialog"
-    max-width="470"
+    :class="{ fullscreen: display.smAndDown }"
+    :max-width="display.smAndDown ? '100%' : 470"
+    :fullscreen="display.smAndDown"
     @update:model-value="updateDialog(false)"
   >
-    <v-card class="pa-13 py-13">
+    <v-card>
       <div class="title mb-6">Contact details</div>
       <v-form ref="formRef">
         <v-row dense>
@@ -66,6 +68,7 @@
             />
           </v-col>
         </v-row>
+
         <v-btn
           class="mt-4"
           width="100%"
@@ -74,6 +77,15 @@
           @click="save"
         >
           Save
+        </v-btn>
+        <v-btn
+          class="mt-4"
+          width="100%"
+          height="50"
+          flat
+          @click="updateDialog(false)"
+        >
+          Cancel
         </v-btn>
       </v-form>
     </v-card>
@@ -88,6 +100,7 @@ import {
   phoneRule
 } from '@/utils/validationRules'
 import { useCartStore } from '@/store/cart'
+import { useDisplay } from 'vuetify'
 
 const props = defineProps({
   modelValue: {
@@ -95,6 +108,8 @@ const props = defineProps({
     default: false
   }
 })
+
+const display = ref(useDisplay())
 
 const cartStore = useCartStore()
 const { contactDetails } = cartStore
@@ -123,10 +138,18 @@ const updateDialog = value => emit('update:modelValue', value)
 <style scoped>
 .v-card {
   border-radius: 24px !important;
+  padding: 40px;
 
   .title {
     font-size: 32px;
     font-weight: 500;
+  }
+}
+
+.fullscreen {
+  .v-card {
+    border-radius: 0 !important;
+    padding: 20px;
   }
 }
 </style>

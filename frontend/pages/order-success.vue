@@ -5,11 +5,13 @@
       Check your email address and login to the application and check the order
       status.
     </div>
-    <v-btn width="200" color="black" to="/login">Login</v-btn>
+    <v-btn class="login-button" color="black" to="/login">Login</v-btn>
   </div>
 </template>
 
 <style lang="scss" scoped>
+@import '@/assets/scss/breakpoints';
+
 .order-success {
   display: flex;
   flex-direction: column;
@@ -17,6 +19,11 @@
   align-items: center;
   height: 90vh;
   gap: 40px;
+
+  @media (max-width: $lg) {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 
   .title {
     font-size: 30px;
@@ -29,7 +36,15 @@
     font-size: 16px;
     font-weight: 300;
     text-align: center;
-    width: 400px;
+    max-width: 400px;
+  }
+
+  .login-button {
+    width: 200px;
+
+    @media (max-width: $sm) {
+      width: 100%;
+    }
   }
 }
 </style>
