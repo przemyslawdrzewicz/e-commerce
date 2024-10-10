@@ -11,5 +11,6 @@ export default defineNuxtConfig({
   css: ['vuetify/styles', '~/assets/scss/main.scss'],
   alias: {
     pinia: '/node_modules/@pinia/nuxt/node_modules/pinia/dist/pinia.mjs'
-  }
+  },
+  ssr: false
 })

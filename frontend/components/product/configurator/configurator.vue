@@ -1,7 +1,7 @@
 <template>
-  <div class="product-configurator">
+  <div class="product-configurator mb-10">
     <v-row>
-      <v-col cols="6">
+      <v-col cols="12" md="6">
         <v-btn variant="text" width="80" class="mb-4" to="/products">
           <v-icon class="mr-2">mdi-arrow-left</v-icon>
           Back
@@ -11,13 +11,32 @@
           :price="product.price"
         />
         <hr class="separator" />
-        <product-configurator-stepper ref="stepper" :product="product" />
+        <product-configurator-photo
+          v-if="display.smAndDown"
+          :configurator="product.configurator"
+          :image="product.image"
+        />
+        <product-configurator-stepper
+          v-if="display.mdAndUp"
+          :product="product"
+        />
+        <product-configurator-stepper-mobile
+          v-else
+          class="mt-10"
+          :configurator="product.configurator"
+          :product="product"
+        />
       </v-col>
-      <v-col cols="6" class="d-flex justify-center">
+      <v-col
+        v-if="display.mdAndUp"
+        cols="12"
+        md="6"
+        class="d-flex justify-center"
+      >
         <product-configurator-photo
           class="align-self-center"
+          :configurator="product.configurator"
           :image="product.image"
-          :config="config"
         />
       </v-col>
     </v-row>
@@ -25,6 +44,8 @@
 </template>
 
 <script setup>
+import { useDisplay } from 'vuetify'
+
 const props = defineProps({
   product: {
     type: Object,
@@ -32,19 +53,17 @@ const props = defineProps({
   }
 })
 
-const stepper = ref(null)
-const config = computed(() => stepper.value?.config || [])
+const display = ref(useDisplay())
 </script>
 
 <style lang="scss" scoped>
-.product-configurator {
-  width: 800px;
+@import '@/assets/scss/breakpoints';
 
-  .separator {
-    width: 60px;
-    height: 6px;
-    background: black;
-    border-radius: 2px;
+.product-configurator {
+  margin-left: 200px;
+
+  @media (max-width: $md) {
+    margin-left: 0;
   }
 }
 </style>

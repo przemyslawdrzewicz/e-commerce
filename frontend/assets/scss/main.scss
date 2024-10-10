@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-@import '@/assets/scss/breakpoints';
 
 * {
   font-family: 'Inter', system-ui;
@@ -17,32 +16,32 @@ body {
   background: linear-gradient(#f3f2f3 0%, #ffffff 51%, #f3f2f3 100%);
 }
 
-.container {
-  padding-left: 20px;
-  padding-right: 20px;
-  min-height: 91vh;
-  display: flex;
+// .container {
+//   padding-left: 20px;
+//   padding-right: 20px;
+//   min-height: 91vh;
+//   display: flex;
 
-  @media (min-width: 1300px) {
-    padding-left: 100px;
-    padding-right: 100px;
-  }
+//   @media (min-width: 1300px) {
+//     padding-left: 100px;
+//     padding-right: 100px;
+//   }
 
-  @media (min-width: 1600px) {
-    padding-left: 300px;
-    padding-right: 300px;
-  }
+//   @media (min-width: 1600px) {
+//     padding-left: 300px;
+//     padding-right: 300px;
+//   }
 
-  .content {
-    align-self: center;
-    width: 100%;
+//   .content {
+//     align-self: center;
+//     width: 100%;
 
-    @media (max-width: $md) {
-      align-self: flex-start;
-      margin-top: 40px;
-    }
-  }
-}
+//     @media (max-width: $md) {
+//       align-self: flex-start;
+//       margin-top: 40px;
+//     }
+//   }
+// }
 
 .v-row {
   margin: 0 !important;
@@ -50,10 +49,6 @@ body {
 
 .v-btn {
   text-transform: unset !important;
-}
-
-.separator {
-  border-top: 1px solid #0000001b;
 }
 
 // data table
@@ -82,4 +77,15 @@ body {
 .text-decoration-none {
   text-decoration: none;
   color: unset;
+}
+
+.separator {
+  width: 60px;
+  height: 6px;
+  background: black;
+  border-radius: 2px;
+}
+
+.line-separator {
+  border-top: 1px solid #0000001b;
 }

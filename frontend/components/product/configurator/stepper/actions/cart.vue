@@ -2,7 +2,7 @@
   <v-btn
     class="step-btn"
     color="black"
-    width="200"
+    :width="width"
     :disabled="!isValid"
     to="/products/"
     @click="addToCart"
@@ -12,52 +12,40 @@
 </template>
 
 <script setup>
-import { validateConfigValue } from '@/utils/products/configurator'
 import { useCartStore } from '@/store/cart'
+import { useConfiguratorStore } from '@/store/configurator'
 
 const cartStore = useCartStore()
 
 const props = defineProps({
-  config: {
-    type: Array,
-    default: () => []
-  },
-  product: {
-    type: Object,
-    default: () => {}
-  },
-  currentStep: {
-    type: Number,
-    default: 0
+  width: {
+    type: String,
+    default: '200'
   }
 })
 
-const { id, config, product, currentStep } = toRefs(props)
+const configuratorStore = useConfiguratorStore()
+const { product } = toRefs(configuratorStore)
 
-const isValid = computed(() =>
-  validateConfigValue(config.value, currentStep.value)
-)
+const { configurator } = toRefs(product.value)
+
+const isValid = computed(() => {
+  const someEmptyValue = configurator.value.some(({ value }) => !value)
+  return !someEmptyValue
+})
 
 const addToCart = () => {
-  const { title, price, image } = product.value
-  let selectedImage = image
+  let fullImage = product.value.image
 
-  config.value.forEach(({ code, value, colors }) => {
-    if (!colors) return
-
-    const selectedColor = colors.find(({ color }) => color === value)
-    selectedImage = selectedImage.replace(`{${code}}`, selectedColor.code)
+  configurator.value.forEach(({ code, value, colors }) => {
+    if (colors) fullImage = fullImage.replace(`{${code}}`, value)
   })
 
-  const item = {
-    id,
-    title,
-    price,
-    image: selectedImage,
-    configurator: config.value,
-    quantity: 1
+  const newProduct = {
+    ...product.value,
+    fullImage
   }
 
-  cartStore.addItem(item)
+  cartStore.addItem(newProduct)
 }
 </script>

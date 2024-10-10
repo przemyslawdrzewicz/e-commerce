@@ -17,19 +17,21 @@ const cartStore = useCartStore()
 const { items } = storeToRefs(cartStore)
 </script>
 
-<style scoped>
+<style lans="scss" scoped>
 .shopping-cart {
   display: flex;
   justify-content: center;
-  height: 80vh;
-}
+  min-height: 91vh;
 
-.cart {
-  width: 1400px;
-}
+  /* height: 80vh; */
 
-.title {
-  font-size: 58px;
-  font-weight: bold;
+  .cart {
+    width: 1400px;
+
+    .title {
+      font-size: 58px;
+      font-weight: bold;
+    }
+  }
 }
 </style>

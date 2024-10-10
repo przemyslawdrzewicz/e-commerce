@@ -11,26 +11,28 @@
 </template>
 
 <script setup>
-import { validateConfigValue } from '@/utils/products/configurator'
+import { useConfiguratorStore } from '@/store/configurator'
 
 const props = defineProps({
-  config: {
-    type: Array,
-    default: () => []
-  },
-  currentStep: {
-    type: Number,
-    default: 0
+  selectedConfigurator: {
+    type: Object,
+    default: () => {}
   }
 })
 
 const emit = defineEmits(['next'])
 
-const { config, currentStep } = toRefs(props)
+const configuratorStore = useConfiguratorStore()
+const { product } = toRefs(configuratorStore)
+const { configurator } = toRefs(product.value)
+const { selectedConfigurator } = toRefs(props)
 
-const isValid = computed(() =>
-  validateConfigValue(config.value, currentStep.value)
-)
+const isValid = computed(() => {
+  const configuratorIndex = configurator.value.findIndex(
+    ({ code }) => selectedConfigurator.value.code === code
+  )
+  return !!configurator.value[configuratorIndex].value
+})
 
 const next = () => emit('next')
 </script>
