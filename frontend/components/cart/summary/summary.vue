@@ -31,24 +31,30 @@
   </v-card>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { formatPrice } from '@/utils/global'
 import { useCartStore } from '@/store/cart'
+import type { Product } from '@/interfaces/product'
 
-const props = defineProps({
-  items: {
-    type: Array,
-    default: () => []
-  }
-})
+interface Props {
+  items: Product[]
+}
+
+interface Deliveries {
+  title: string
+  value: string
+  price: number
+}
+
+const props = defineProps<Props>()
 
 const cartStore = useCartStore()
 const router = useRouter()
 
-const { delivery, contactDetails } = toRefs(cartStore)
+const { delivery, contactDetails } = storeToRefs(cartStore)
 const { items } = toRefs(props)
 
-const deliveries = [
+const deliveries: Deliveries[] = [
   {
     title: 'Standard delivery',
     value: 'standard',
@@ -65,7 +71,7 @@ const isSaveDisabled = computed(
   () => !items.value.length || !contactDetails.value.fullname
 )
 
-const buy = async () => {
+const buy = () => {
   console.log('buy')
 
   router.push('/order-success')
@@ -77,7 +83,9 @@ const productsPrice = computed(() =>
 
 const deliveryPrice = computed(() => {
   if (!delivery.value) return 0
-  return deliveries.find(({ value }) => value === delivery.value).price
+
+  const deliveryItem = deliveries.find(({ value }) => value === delivery.value)
+  return deliveryItem?.price || 0
 })
 
 const total = computed(() => productsPrice.value + deliveryPrice.value)

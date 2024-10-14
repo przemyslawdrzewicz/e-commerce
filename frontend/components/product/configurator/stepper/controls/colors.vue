@@ -8,7 +8,7 @@
     >
       <div
         class="color-border d-flex justify-center"
-        :style="{ border: border(code, color) }"
+        :style="colorStyles(code, color)"
       >
         <div
           class="color align-self-center"
@@ -19,18 +19,20 @@
   </div>
 </template>
 
-<script setup>
-const props = defineProps({
-  colors: {
-    type: Array,
-    default: () => []
-  }
-})
+<script lang="ts" setup>
+import type { Color } from '@/interfaces/product'
+
+interface Props {
+  colors: Color[]
+}
+
+const props = defineProps<Props>()
 
 const model = defineModel()
-const changeColor = code => (model.value = code)
-const border = (code, color) =>
-  model.value === code ? `2px solid ${color}` : 'none'
+const changeColor = (code: string) => (model.value = code)
+const colorStyles = (code: string, color: string) => ({
+  border: model.value === code ? `2px solid ${color}` : 'none'
+})
 </script>
 
 <style lang="scss" scoped>

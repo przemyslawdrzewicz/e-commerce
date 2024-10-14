@@ -10,14 +10,15 @@
   </v-row>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { useDisplay } from 'vuetify'
+import type { Product } from '@/interfaces/product'
+
 const display = ref(useDisplay())
 
-const props = defineProps({
-  items: {
-    type: Array,
-    default: () => []
-  }
-})
+interface Props {
+  items: Product[]
+}
+
+const props = defineProps<Props>()
 </script>

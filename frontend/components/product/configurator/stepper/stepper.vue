@@ -4,7 +4,7 @@
       class="steps align-self-center"
       :steps="steps"
       :current-step="step"
-      @back="setStep($event)"
+      @back="step = $event"
     />
     <product-configurator-stepper-content
       class="align-self-center"
@@ -12,32 +12,35 @@
     />
   </div>
   <product-configurator-stepper-actions-next
-    v-if="step < steps.length"
+    v-if="step < stepsCount"
     :selected-configurator="selectedConfigurator"
-    @next="setStep(step + 1)"
+    @next="step += 1"
   />
   <product-configurator-stepper-actions-cart v-else />
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { useConfiguratorStore } from '@/store/configurator'
-
-const configuratorStore = useConfiguratorStore()
-const { product } = toRefs(configuratorStore)
-
-const { configurator } = toRefs(product.value)
+import type { Configurator } from '@/interfaces/product'
 
 const step = ref(1)
-const setStep = value => (step.value = value)
 
-const steps = computed(() =>
-  configurator.value.map(({ category }, index) => ({
-    category,
-    index: index + 1
-  }))
+const configuratorStore = useConfiguratorStore()
+const { product } = storeToRefs(configuratorStore)
+
+const configurator = computed(() => product.value?.configurator || [])
+
+const selectedConfigurator = computed(
+  () => configurator.value?.[step.value - 1] || {}
 )
 
-const selectedConfigurator = computed(() => configurator.value[step.value - 1])
+const newStepItem = (item: Configurator, index: number) => ({
+  category: item.category,
+  index: index + 1
+})
+
+const steps = computed(() => configurator.value?.map(newStepItem) || [])
+const stepsCount = steps.value?.length || 0
 </script>
 
 <style lang="scss" scoped>

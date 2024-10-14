@@ -22,16 +22,16 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { formatPrice } from '@/utils/global'
 import { configurationNames } from '@/utils/cart'
+import type { Product } from '@/interfaces/product'
 
-const props = defineProps({
-  items: {
-    type: Array,
-    default: () => []
-  }
-})
+interface Props {
+  items: Product[]
+}
+
+const props = defineProps<Props>()
 </script>
 
 <style lang="scss" scoped>

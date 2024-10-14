@@ -11,13 +11,14 @@
   </v-row>
 </template>
 
-<script setup>
-const props = defineProps({
-  products: {
-    type: Array,
-    default: () => []
-  }
-})
+<script lang="ts" setup>
+import type { Product } from '@/interfaces/product'
+
+interface Props {
+  products: Product[]
+}
+
+const props = defineProps<Props>()
 </script>
 
 <style scoped lang="scss">

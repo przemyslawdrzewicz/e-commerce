@@ -24,6 +24,6 @@
   </v-menu>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { navigationLinks } from '@/utils/appbar'
 </script>

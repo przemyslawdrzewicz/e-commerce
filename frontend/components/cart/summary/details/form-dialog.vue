@@ -4,7 +4,7 @@
     class="form-dialog"
     :class="{ fullscreen: display.smAndDown }"
     :max-width="display.smAndDown ? '100%' : 470"
-    :fullscreen="display.smAndDown"
+    :fullscreen="!!display.smAndDown"
     @update:model-value="updateDialog(false)"
   >
     <v-card>
@@ -92,7 +92,7 @@
   </v-dialog>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import {
   requiredRule,
   emailRule,
@@ -102,22 +102,23 @@ import {
 import { useCartStore } from '@/store/cart'
 import { useDisplay } from 'vuetify'
 
-const props = defineProps({
-  modelValue: {
-    type: Boolean,
-    default: false
-  }
-})
+interface Props {
+  modelValue: boolean
+}
+
+const props = defineProps<Props>()
 
 const display = ref(useDisplay())
 
 const cartStore = useCartStore()
-const { contactDetails } = cartStore
+const { contactDetails } = storeToRefs(cartStore)
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits<{
+  'update:modelValue': [value: boolean]
+}>()
 
-const formRef = ref(null)
-const form = ref({ ...contactDetails })
+const formRef = ref<any>(null)
+const form = ref(contactDetails)
 
 const validateForm = async () => {
   const { valid } = await formRef.value.validate()
@@ -132,7 +133,7 @@ const save = async () => {
   updateDialog(false)
 }
 
-const updateDialog = value => emit('update:modelValue', value)
+const updateDialog = (value: boolean) => emit('update:modelValue', value)
 </script>
 
 <style scoped>

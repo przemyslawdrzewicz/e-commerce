@@ -5,15 +5,11 @@
   </v-btn>
 </template>
 
-<script setup>
-const props = defineProps({
-  to: {
-    type: String,
-    default: ''
-  },
-  title: {
-    type: String,
-    default: 'Back'
-  }
-})
+<script lang="ts" setup>
+interface Props {
+  to: string
+  title: string
+}
+
+const props = defineProps<Props>()
 </script>

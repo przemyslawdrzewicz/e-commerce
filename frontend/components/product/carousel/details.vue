@@ -3,17 +3,17 @@
     <v-row>
       <v-col cols="12" md="6" class="product">
         <div>
-          <div class="price">{{ formatPrice(selected.price) }}</div>
-          <div class="title">{{ selected.title }}</div>
+          <div class="price">{{ formatPrice(price) }}</div>
+          <div class="title">{{ title }}</div>
           <div class="description mt-6 mb-10">
-            {{ selected.description }}
+            {{ description }}
           </div>
           <hr class="separator mb-10" />
           <v-btn
             v-show="display.mdAndUp"
             class="configurator-button"
             color="black"
-            :to="`/products/${selected.code}`"
+            :to="`/products/${code}`"
             width="200"
           >
             Configurator
@@ -22,14 +22,14 @@
       </v-col>
       <v-col cols="12" md="6" class="photo">
         <div class="circle"></div>
-        <img :src="selected.image" />
+        <img :src="image" />
       </v-col>
       <v-row v-show="display.smAndDown">
         <v-col cols="12" class="mt-2">
           <v-btn
             class="configurator-btn mt-15"
             color="black"
-            :to="`/products/${selected.code}`"
+            :to="`/products/${code}`"
             width="100%"
           >
             Configurator
@@ -40,16 +40,24 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { useDisplay } from 'vuetify'
 import { formatPrice } from '@/utils/global'
+import type { Product } from '@/interfaces/product'
 
-const props = defineProps({
-  selected: {
-    type: Object,
-    default: () => {}
-  }
-})
+interface Props {
+  selected: Product | null
+}
+
+const props = defineProps<Props>()
+
+const { selected } = toRefs(props)
+
+const title = computed(() => selected.value?.title)
+const description = computed(() => selected.value?.description)
+const code = computed(() => selected.value?.code)
+const price = computed(() => selected.value?.price)
+const image = computed(() => selected.value?.image)
 
 const display = ref(useDisplay())
 </script>

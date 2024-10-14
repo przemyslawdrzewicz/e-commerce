@@ -5,20 +5,25 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { useConfiguratorStore } from '@/store/configurator'
+import type { Configurator } from '@/interfaces/product'
 
 const configuratorStore = useConfiguratorStore()
-const { product } = toRefs(configuratorStore)
-const { configurator, image } = toRefs(product.value)
+const { product } = storeToRefs(configuratorStore)
+
+const configurator = computed(() => product.value?.configurator)
+const productImage = computed(() => product.value?.image)
+
+const replaceImage = (image: string, { code, value }: Configurator) =>
+  image.replace(`{${code}}`, value)
 
 const selectedImage = computed(() => {
-  if (!product.value) return ''
+  if (!configurator.value || !productImage.value) return ''
 
-  const createNewUrl = (updatedImage, { colors, code, value }) =>
-    colors ? updatedImage.replace(`{${code}}`, value) : updatedImage
-
-  return configurator.value.reduce(createNewUrl, image.value)
+  return configurator.value
+    .filter(item => item.colors)
+    .reduce(replaceImage, productImage.value)
 })
 </script>
 

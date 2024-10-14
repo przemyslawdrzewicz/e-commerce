@@ -19,17 +19,24 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { configurationNames } from '@/utils/cart'
+import type { Product } from '@/interfaces/product'
 
-const props = defineProps({
-  items: {
-    type: Array,
-    default: () => []
-  }
-})
+interface Props {
+  items: Product[]
+}
 
-const headers = [
+interface Header {
+  title: string
+  value: string
+  class?: string
+  type?: string
+}
+
+const props = defineProps<Props>()
+
+const headers: Header[] = [
   { title: 'Product', value: 'product' },
   { title: 'Total price', value: 'price', class: 'text-right', type: 'price' }
 ]
