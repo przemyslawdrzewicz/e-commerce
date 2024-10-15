@@ -4,26 +4,24 @@
   </v-btn>
 </template>
 
-<script setup>
-const props = defineProps({
-  products: {
-    type: Array,
-    default: () => []
-  },
-  selectedIndex: {
-    type: Number,
-    default: 0
-  }
-})
+<script lang="ts" setup>
+import type { Product } from '@/interfaces/product'
+
+interface Props {
+  products: Product[]
+  selectedIndex: number
+}
+
+const props = defineProps<Props>()
+
+const { selectedIndex, products } = toRefs(props)
 
 const emit = defineEmits(['update-selected'])
 
 const previous = () => {
-  const { selectedIndex, products } = props
-
-  const newIndex = selectedIndex - 1
+  const newIndex = selectedIndex.value - 1
   const lastIndex = 3
-  const newSelected = products[newIndex >= 0 ? newIndex : lastIndex]
+  const newSelected = products.value[newIndex >= 0 ? newIndex : lastIndex]
 
   emit('update-selected', newSelected)
 }

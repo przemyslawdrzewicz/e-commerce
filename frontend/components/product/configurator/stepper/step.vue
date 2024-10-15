@@ -1,45 +1,41 @@
 <template>
-  <div :class="{ disabled: isDisabled }">
+  <div class="step" :class="{ disabled: isDisabled }">
     <v-avatar class="badge mr-6 my-2" size="20" :color="color">
-      <span>{{ step.index }}</span>
+      <span>{{ index }}</span>
     </v-avatar>
-    <span class="category" @click="back">
-      {{ step.category }}
-    </span>
-    <div v-if="!isLastStep" class="vertical-separator"></div>
+    <span class="category" @click="back">{{ category }}</span>
+    <div class="vertical-separator"></div>
   </div>
 </template>
 
-<script setup>
-const props = defineProps({
-  step: {
-    type: Object,
-    default: () => {}
-  },
-  steps: {
-    type: Array,
-    default: () => []
-  },
-  currentStep: {
-    type: Number,
-    default: 1
-  }
-})
+<script lang="ts" setup>
+interface Props {
+  index: number
+  category: string
+  currentStep: number
+}
 
-const emit = defineEmits(['back'])
+const props = defineProps<Props>()
+const { index, category, currentStep } = toRefs(props)
 
-const { step, steps, currentStep } = toRefs(props)
+const emit = defineEmits<{
+  back: [value: number]
+}>()
 
-const isLastStep = computed(() => step.value.index === steps.value.length)
-const isDisabled = computed(() => step.value.index >= currentStep.value)
-const color = computed(() =>
-  step.value.index === currentStep.value ? 'primary' : '#CECECE'
-)
+const back = () => !isDisabled.value && emit('back', index.value)
 
-const back = () => !isDisabled.value && emit('back', step.value.index)
+const isDisabled = computed(() => index.value >= currentStep.value)
+const isCurrentStep = computed(() => index.value === currentStep.value)
+const color = computed(() => (isCurrentStep.value ? 'primary' : '#CECECE'))
 </script>
 
 <style lang="scss" scoped>
+.step:last-child {
+  .vertical-separator {
+    display: none;
+  }
+}
+
 .badge {
   span {
     font-size: 10px;

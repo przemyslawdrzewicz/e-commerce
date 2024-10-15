@@ -29,14 +29,14 @@
   <cart-summary-details-form-dialog v-if="formModel" v-model="formModel" />
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { useCartStore } from '@/store/cart'
 
 const cartStore = useCartStore()
-const { contactDetails } = toRefs(cartStore)
+const { contactDetails } = storeToRefs(cartStore)
 
 const formModel = ref(false)
-const setFormModel = value => (formModel.value = value)
+const setFormModel = (value: boolean) => (formModel.value = value)
 
 const isErrorMessage = ref(false)
 

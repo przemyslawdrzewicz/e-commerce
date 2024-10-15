@@ -16,9 +16,8 @@
   </client-only>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { useCartStore } from '@/store/cart'
-import { storeToRefs } from 'pinia'
 import { useDisplay } from 'vuetify'
 
 const display = ref(useDisplay())

@@ -15,7 +15,7 @@
   </v-app-bar>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { useDisplay } from 'vuetify'
 const display = ref(useDisplay())
 </script>

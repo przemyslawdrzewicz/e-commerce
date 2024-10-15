@@ -39,28 +39,28 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { useDisplay } from 'vuetify'
+import type { Product } from '@/interfaces/product'
+
+interface Props {
+  products: Product[]
+}
+
+const props = defineProps<Props>()
 
 const DEFAULT_INDEX = 2
 
-const props = defineProps({
-  products: {
-    type: Array,
-    default: () => []
-  }
-})
-
 const display = ref(useDisplay())
 
-const selected = ref({})
-const setSelected = value => (selected.value = value)
+const selected = ref<Product | null>(null)
+const setSelected = (value: Product) => (selected.value = value)
 
 const { products } = props
 
-onMounted(() => products.length && setSelected(products[DEFAULT_INDEX]))
-
 const selectedIndex = computed(() =>
-  products.findIndex(product => product.id === selected.value.id)
+  products.findIndex(product => product.id === selected.value?.id)
 )
+
+onMounted(() => products.length && setSelected(products[DEFAULT_INDEX]))
 </script>

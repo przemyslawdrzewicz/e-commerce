@@ -10,27 +10,32 @@
   </v-btn>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { useConfiguratorStore } from '@/store/configurator'
+import type { Configurator } from '@/interfaces/product'
 
-const props = defineProps({
-  selectedConfigurator: {
-    type: Object,
-    default: () => {}
-  }
-})
+interface Props {
+  selectedConfigurator: Configurator
+}
 
-const emit = defineEmits(['next'])
+const props = defineProps<Props>()
+
+const emit = defineEmits<{
+  next: []
+}>()
 
 const configuratorStore = useConfiguratorStore()
-const { product } = toRefs(configuratorStore)
-const { configurator } = toRefs(product.value)
+const { product } = storeToRefs(configuratorStore)
+
+const configurator = computed(() => product.value?.configurator || [])
+
 const { selectedConfigurator } = toRefs(props)
 
 const isValid = computed(() => {
   const configuratorIndex = configurator.value.findIndex(
     ({ code }) => selectedConfigurator.value.code === code
   )
+
   return !!configurator.value[configuratorIndex].value
 })
 

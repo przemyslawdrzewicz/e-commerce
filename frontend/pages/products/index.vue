@@ -1,13 +1,21 @@
 <template>
   <div class="container">
     <div class="content">
-      <product-carousel :products="products.results" />
+      <product-carousel :products="products?.results || []" />
     </div>
   </div>
 </template>
 
-<script setup>
-const { data: products } = await useFetch('/api/products/products/')
+<script lang="ts" setup>
+import type { Product } from '@/interfaces/product'
+
+interface ProductFetch {
+  results: Product[]
+}
+
+const { data: products } = await useFetch<ProductFetch>(
+  '/api/products/products/'
+)
 </script>
 
 <style lang="scss" scoped>

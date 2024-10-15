@@ -1,28 +1,29 @@
 <template>
   <div>
-    <div v-for="step in steps" :key="step.value">
-      <product-configurator-stepper-step
-        :current-step="currentStep"
-        :steps="steps"
-        :step="step"
-        @back="back"
-      />
-    </div>
+    <product-configurator-stepper-step
+      v-for="step in steps"
+      :key="step.index"
+      :current-step="currentStep"
+      :category="step.category"
+      :index="step.index"
+      @back="back"
+    />
   </div>
 </template>
 
-<script setup>
-const props = defineProps({
-  steps: {
-    type: Array,
-    default: () => []
-  },
-  currentStep: {
-    type: Number,
-    default: 1
-  }
-})
+<script lang="ts" setup>
+import type { Step } from '@/interfaces/configurator/stepper'
 
-const emit = defineEmits(['back'])
-const back = value => emit('back', value)
+interface Props {
+  steps: Step[]
+  currentStep: number
+}
+
+const props = defineProps<Props>()
+
+const emit = defineEmits<{
+  back: [value: number]
+}>()
+
+const back = (value: number) => emit('back', value)
 </script>

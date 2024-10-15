@@ -1,23 +1,19 @@
 <template>
   <product-configurator-stepper-controls-colors
-    v-if="selectedConfigurator.type === TYPES.COLOR"
+    v-if="selectedConfigurator.type === Types.Color"
     v-model="configurator[configuratorIndex].value"
     :colors="selectedConfigurator.colors"
   />
   <product-configurator-stepper-controls-number
-    v-else-if="selectedConfigurator.type === TYPES.NUMBER"
+    v-else-if="selectedConfigurator.type === Types.Number"
     v-model="configurator[configuratorIndex].value"
     :params="selectedConfigurator.params"
   />
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { useConfiguratorStore } from '@/store/configurator'
-
-const TYPES = {
-  COLOR: 'color',
-  NUMBER: 'number'
-}
+import { Types } from '@/enums/configurator/fields'
 
 const props = defineProps({
   selectedConfigurator: {
@@ -29,12 +25,13 @@ const props = defineProps({
 const { selectedConfigurator } = toRefs(props)
 
 const configuratorStore = useConfiguratorStore()
-const { product } = toRefs(configuratorStore)
-const { configurator } = toRefs(product.value)
+const { product } = storeToRefs(configuratorStore)
 
-const configuratorIndex = computed(() => {
-  return configurator.value.findIndex(
+const configurator = computed(() => product.value?.configurator || [])
+
+const configuratorIndex = computed(() =>
+  configurator.value.findIndex(
     ({ code }) => code === selectedConfigurator.value.code
   )
-})
+)
 </script>

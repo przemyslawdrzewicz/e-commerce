@@ -7,9 +7,9 @@
   </v-btn>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { useCartStore } from '@/store/cart'
 const cartStore = useCartStore()
 
-const { items } = toRefs(cartStore)
+const { items } = storeToRefs(cartStore)
 </script>

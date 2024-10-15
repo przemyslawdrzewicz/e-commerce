@@ -2,7 +2,7 @@
   <div class="product-configurator mb-10">
     <v-row>
       <v-col cols="12" md="6">
-        <actions-back to="/products" />
+        <actions-back title="Back" to="/products" />
         <product-configurator-details />
         <hr class="separator" />
         <product-configurator-photo v-if="display.smAndDown" />
@@ -21,7 +21,7 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { useDisplay } from 'vuetify'
 
 const display = ref(useDisplay())

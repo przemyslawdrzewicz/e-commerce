@@ -9,27 +9,22 @@
   </div>
 </template>
 
-<script setup>
-const props = defineProps({
-  page: {
-    type: Number,
-    default: 1
-  },
-  length: {
-    type: Number,
-    default: 0
-  }
-})
+<script lang="ts" setup>
+interface Props {
+  page?: number
+  length?: number
+}
 
-const { page, length } = toRefs(props)
+const { page = 1, length = 0 } = defineProps<Props>()
 
-const emit = defineEmits(['previous', 'next'])
+const emit = defineEmits<{
+  previous: []
+  next: []
+}>()
 
 const previous = () => emit('previous')
 const next = () => emit('next')
 
-const isPreviousDisabled = computed(() => !length.value || page.value === 1)
-const isNextDisabled = computed(
-  () => !length.value || page.value === length.value
-)
+const isPreviousDisabled = computed(() => !length || page === 1)
+const isNextDisabled = computed(() => !length || page === length)
 </script>

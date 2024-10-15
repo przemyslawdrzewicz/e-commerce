@@ -6,13 +6,15 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { formatPrice } from '@/utils/global'
 import { useConfiguratorStore } from '@/store/configurator'
 
 const configuratorStore = useConfiguratorStore()
-const { product } = toRefs(configuratorStore)
-const { title, price } = toRefs(product.value)
+const { product } = storeToRefs(configuratorStore)
+
+const title = computed(() => product.value?.title)
+const price = computed(() => product.value?.price)
 </script>
 
 <style lang="scss" scoped>

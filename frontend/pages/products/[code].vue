@@ -1,32 +1,34 @@
 <template>
   <div class="container">
     <div class="content">
-      <product-configurator v-if="!loading" />
+      <product-configurator v-if="product" />
     </div>
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { useConfiguratorStore } from '@/store/configurator'
+import type { Product } from '@/interfaces/product'
+
 const configuratorStore = useConfiguratorStore()
 
-const product = ref(null)
-const loading = ref(true)
-
-onMounted(() => getProduct())
+const product = ref<Product | null>()
 
 const getProduct = async () => {
   try {
-    product.value = await $fetch('/api/products/sofia/')
+    product.value = await $fetch<Product>('/api/products/sofia/')
     saveDefaultCartToStore()
-    loading.value = false
   } catch (e) {
     console.log(e, 'error')
   }
 }
 
-const saveDefaultCartToStore = () =>
+const saveDefaultCartToStore = () => {
+  if (!product.value) throw new Error('Product not found')
   configuratorStore.changeProduct(product.value)
+}
+
+onMounted(() => getProduct())
 </script>
 
 <style lang="scss" scoped>
