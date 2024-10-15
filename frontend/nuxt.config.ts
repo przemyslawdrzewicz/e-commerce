@@ -9,7 +9,7 @@ export default defineNuxtConfig({
     plugins: [vuetify({ autoImport: true })]
   },
 
-  modules: ['@pinia/nuxt'],
+  modules: ['@pinia/nuxt', '@nuxt/test-utils/module'],
   css: ['vuetify/styles', '~/assets/scss/main.scss'],
 
   alias: {

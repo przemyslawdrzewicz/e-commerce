@@ -9,17 +9,21 @@ import type { Product } from '@/interfaces/product'
 
 interface Props {
   products: Product[]
-  selectedIndex: number
+  selectedProduct: Product | null
 }
 
 const props = defineProps<Props>()
 
-const { selectedIndex, products } = toRefs(props)
+const { selectedProduct, products } = toRefs(props)
 
 const emit = defineEmits(['update-selected'])
 
 const previous = () => {
-  const newIndex = selectedIndex.value - 1
+  const selectedProductIndex = products.value.findIndex(
+    product => product.id === selectedProduct.value?.id
+  )
+
+  const newIndex = selectedProductIndex - 1
   const lastIndex = 3
   const newSelected = products.value[newIndex >= 0 ? newIndex : lastIndex]
 

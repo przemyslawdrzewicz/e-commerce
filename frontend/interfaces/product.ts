@@ -1,7 +1,7 @@
 interface Product {
   id: number
   title: string
-  price: number
+  price: number | string
   description: String
   image: string
   code: string
