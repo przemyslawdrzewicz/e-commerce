@@ -20,7 +20,7 @@ import { useDisplay } from 'vuetify'
 const display = ref(useDisplay())
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 @import '@/assets/scss/breakpoints';
 
 .app-bar {

@@ -3,7 +3,7 @@
     <v-row>
       <v-col cols="12" md="6" class="product">
         <div>
-          <div class="price">{{ selected.price }} PLN</div>
+          <div class="price">{{ formatPrice(selected.price) }}</div>
           <div class="title">{{ selected.title }}</div>
           <div class="description mt-6 mb-10">
             {{ selected.description }}
@@ -11,7 +11,7 @@
           <hr class="separator mb-10" />
           <v-btn
             v-show="display.mdAndUp"
-            class="configurator-btn"
+            class="configurator-button"
             color="black"
             :to="`/products/${selected.code}`"
             width="200"
@@ -24,22 +24,25 @@
         <div class="circle"></div>
         <img :src="selected.image" />
       </v-col>
-      <v-col v-show="display.smAndDown" cols="12" class="mt-2">
-        <v-btn
-          class="configurator-btn mt-15"
-          color="black"
-          :to="`/products/${selected.code}`"
-          width="100%"
-        >
-          Configurator
-        </v-btn>
-      </v-col>
+      <v-row v-show="display.smAndDown">
+        <v-col cols="12" class="mt-2">
+          <v-btn
+            class="configurator-btn mt-15"
+            color="black"
+            :to="`/products/${selected.code}`"
+            width="100%"
+          >
+            Configurator
+          </v-btn>
+        </v-col>
+      </v-row>
     </v-row>
   </div>
 </template>
 
 <script setup>
 import { useDisplay } from 'vuetify'
+import { formatPrice } from '@/utils/global'
 
 const props = defineProps({
   selected: {
@@ -122,7 +125,7 @@ const display = ref(useDisplay())
     position: relative;
 
     @media (max-width: $md) {
-      height: 250px;
+      height: 300px;
     }
 
     .circle {
@@ -136,8 +139,13 @@ const display = ref(useDisplay())
       height: 14vw;
 
       @media (max-width: $md) {
-        width: 200px;
-        height: 200px;
+        width: 250px;
+        height: 250px;
+      }
+
+      @media (min-width: $md) and (max-width: $lg) {
+        min-width: 200px;
+        min-height: 200px;
       }
     }
 
@@ -148,17 +156,17 @@ const display = ref(useDisplay())
       transform: translate(-50%, -50%);
 
       width: 100%;
-      max-width: 350px;
-      max-height: 350px;
+      max-width: 380px;
+      max-height: 380px;
 
       @media (min-width: $md) {
-        max-width: 450px;
-        max-height: 450px;
+        width: 550px;
+        height: 500px;
       }
     }
   }
 
-  .configurator-btn {
+  .configurator-button {
     font-size: 12px !important;
   }
 }

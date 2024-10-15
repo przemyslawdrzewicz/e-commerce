@@ -2,7 +2,7 @@
   <data-table :headers="headers" :items="items">
     <template #product="{ item }">
       <div class="d-flex">
-        <img class="image" :src="item.image" />
+        <img class="image" :src="item.fullImage" />
         <div class="align-self-center">
           <div>{{ item.title }}</div>
           <div>{{ configurationNames(item.configurator) }}</div>
@@ -14,15 +14,14 @@
     </template>
   </data-table>
   <div class="d-flex justify-space-between mt-7">
-    <v-btn variant="text" to="/products/">
-      <v-icon class="mr-2">mdi-arrow-left</v-icon>
-      Continue shopping
-    </v-btn>
+    <actions-back title="Continue shopping" to="/products" />
     <data-table-pagination />
   </div>
 </template>
 
 <script setup>
+import { configurationNames } from '@/utils/cart'
+
 const props = defineProps({
   items: {
     type: Array,
@@ -32,34 +31,8 @@ const props = defineProps({
 
 const headers = [
   { title: 'Product', value: 'product' },
-  { title: 'Quantity', value: 'quantity' },
   { title: 'Total price', value: 'price', class: 'text-right', type: 'price' }
 ]
-
-const configurationNames = configurator => {
-  const getColorName = (category, value, colors) => {
-    const { code } = colors.find(({ color }) => color === value)
-    return `${category} ${code}`
-  }
-
-  const getNumberName = (category, value, placeholder) =>
-    `${category} ${value} ${placeholder}`
-
-  const getFieldName = (category, value) => `${category} ${value}`
-
-  return configurator
-    .map(({ type, category, value, params, colors }) => {
-      switch (type) {
-        case 'color':
-          return getColorName(category, value, colors)
-        case 'number':
-          return getNumberName(category, value, params?.placeholder)
-        default:
-          return getFieldName(category, value)
-      }
-    })
-    .join(', ')
-}
 </script>
 
 <style scoped>

@@ -6,10 +6,15 @@
       </v-btn>
     </template>
     <v-list width="220" class="py-6 px-2">
-      <v-list-item>Living room</v-list-item>
-      <v-list-item>Office</v-list-item>
-      <v-list-item>Kitchen</v-list-item>
-      <v-list-item class="mt-5">
+      <v-list-item
+        v-for="{ title, to, category } in navigationLinks"
+        :key="category"
+        :to="to"
+        :active="false"
+      >
+        {{ title }}
+      </v-list-item>
+      <v-list-item class="mt-5" to="/cart">
         <div class="d-flex">
           <icons-cart />
           <div class="mt-1 ml-3">Shopping cart</div>
@@ -19,4 +24,6 @@
   </v-menu>
 </template>
 
-<script setup></script>
+<script setup>
+import { navigationLinks } from '@/utils/appbar'
+</script>

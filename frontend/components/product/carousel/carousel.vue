@@ -1,5 +1,5 @@
 <template>
-  <div class="product-carousel">
+  <div>
     <div class="d-flex">
       <product-carousel-actions-previous
         v-show="display.smAndUp"
@@ -15,7 +15,7 @@
         @update-selected="setSelected($event)"
       />
     </div>
-    <div v-show="display.mdAndUp" class="separator mt-12"></div>
+    <div v-show="display.mdAndUp" class="line-separator mt-12"></div>
     <product-carousel-list
       v-show="display.mdAndUp"
       :products="products"

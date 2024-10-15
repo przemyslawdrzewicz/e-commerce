@@ -1,61 +1,75 @@
 <template>
-  <div class="d-flex">
-    <div class="photo">
-      <div class="circle"></div>
-      <img :src="selectedImage" />
-    </div>
+  <div class="photo">
+    <div class="circle"></div>
+    <img class="img" :src="selectedImage" />
   </div>
 </template>
 
 <script setup>
-const props = defineProps({
-  image: {
-    type: String,
-    default: ''
-  },
-  config: {
-    type: Array,
-    default: () => []
-  }
-})
+import { useConfiguratorStore } from '@/store/configurator'
+
+const configuratorStore = useConfiguratorStore()
+const { product } = toRefs(configuratorStore)
+const { configurator, image } = toRefs(product.value)
 
 const selectedImage = computed(() => {
-  const { image, config } = props
-  let newImage = image
+  if (!product.value) return ''
 
-  config.forEach(({ code, value, colors }) => {
-    if (colors) {
-      const selectedColor = colors.find(item => item.color === value)
-      newImage = newImage.replace(`{${code}}`, selectedColor.code)
-    }
-  })
+  const createNewUrl = (updatedImage, { colors, code, value }) =>
+    colors ? updatedImage.replace(`{${code}}`, value) : updatedImage
 
-  return newImage
+  return configurator.value.reduce(createNewUrl, image.value)
 })
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/scss/breakpoints';
+
 .photo {
   position: relative;
 
+  @media (max-width: $md) {
+    height: 300px;
+  }
+
   .circle {
     position: absolute;
-    width: 350px;
-    height: 350px;
     border-radius: 50%;
     background: #f6f6f6;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    width: 300px;
+    height: 300px;
+
+    @media (max-width: $md) {
+      width: 250px;
+      height: 250px;
+    }
+
+    @media (min-width: $md) and (max-width: $lg) {
+      min-width: 200px;
+      min-height: 200px;
+    }
   }
 
-  img {
+  .img {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 600px;
-    height: 600px;
+    max-width: 380px;
+    max-height: 380px;
+    min-width: 380px;
+    min-height: 380px;
+
+    @media (min-width: $md) {
+      min-width: 500px;
+      min-height: 500px;
+
+      max-width: 600px;
+      max-height: 600px;
+    }
   }
 }
 </style>
