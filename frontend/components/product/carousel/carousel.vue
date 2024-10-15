@@ -4,14 +4,14 @@
       <product-carousel-actions-previous
         v-show="display.smAndUp"
         :products="products"
-        :selected-index="selectedIndex"
+        :selected-product="selected"
         @update-selected="setSelected($event)"
       />
       <product-carousel-details :selected="selected" />
       <product-carousel-actions-next
         v-show="display.smAndUp"
         :products="products"
-        :selected-index="selectedIndex"
+        :selected-product="selected"
         @update-selected="setSelected($event)"
       />
     </div>
@@ -21,18 +21,19 @@
       :products="products"
       :selected="selected"
     />
+    <!-- Mobile actions -->
     <div v-show="display.xs" class="d-flex justify-center my-5">
       <product-carousel-actions-previous
         v-show="display.xs"
         :products="products"
-        :selected-index="selectedIndex"
+        :selected-product="selected"
         @update-selected="setSelected($event)"
       />
       <product-carousel-actions-next
         v-show="display.xs"
         class="ml-4"
         :products="products"
-        :selected-index="selectedIndex"
+        :selected-product="selected"
         @update-selected="setSelected($event)"
       />
     </div>
@@ -57,10 +58,6 @@ const selected = ref<Product | null>(null)
 const setSelected = (value: Product) => (selected.value = value)
 
 const { products } = props
-
-const selectedIndex = computed(() =>
-  products.findIndex(product => product.id === selected.value?.id)
-)
 
 onMounted(() => products.length && setSelected(products[DEFAULT_INDEX]))
 </script>
